@@ -98,10 +98,16 @@ fi
 runcmd apt-get update && apt-get install -y -q --no-install-recommends openresty
 
 # Install nodejs
-log "Installing nodejs"
-runcmd wget -qO - https://deb.nodesource.com/setup_16.x | bash -
-runcmd apt-get install -y -q --no-install-recommends nodejs
-runcmd npm install --global yarn
+# log "Installing nodejs"
+#runcmd wget -qO - https://deb.nodesource.com/setup_16.x | bash -
+#runcmd apt-get install -y -q --no-install-recommends nodejs
+#runcmd npm install --global yarn
+
+runcmd apt-get update
+runcmd apt-get install -y ca-certificates curl gnupg
+runcmd mkdir -p /etc/apt/keyrings
+runcmd curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+
 
 # Get latest version information for nginx-proxy-manager
 log "Checking for latest NPM release"
